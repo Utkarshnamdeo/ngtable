@@ -16,9 +16,10 @@ import {
   MatIconModule,
   MatListModule
 } from '@angular/material';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
-  declarations: [AppComponent, MainNavComponent],
+  declarations: [AppComponent, MainNavComponent, MainComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
