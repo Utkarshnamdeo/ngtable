@@ -8,18 +8,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import {
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule
-} from '@angular/material';
-import { MainComponent } from './main/main.component';
 
 @NgModule({
-  declarations: [AppComponent, MainNavComponent, MainComponent],
+  declarations: [AppComponent, MainNavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,13 +18,7 @@ import { MainComponent } from './main/main.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
