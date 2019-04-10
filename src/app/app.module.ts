@@ -8,9 +8,17 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
-
+import { UsersComponent } from './components/users/users.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { AppService } from './app.service';
+import { PipesModule } from './pipes/pipes.module';
 @NgModule({
-  declarations: [AppComponent, MainNavComponent],
+  declarations: [
+    AppComponent,
+    MainNavComponent,
+    UsersComponent,
+    UserDetailComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,9 +26,11 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PipesModule
   ],
-  providers: [],
+  exports: [PipesModule],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
