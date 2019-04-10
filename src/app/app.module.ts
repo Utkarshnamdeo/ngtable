@@ -10,6 +10,7 @@ import { MaterialModule } from './material/material.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { UserItemComponent } from './components/users/user-item/user-item.component';
 import { AppService } from './app.service';
 import { PipesModule } from './pipes/pipes.module';
 @NgModule({
@@ -17,7 +18,8 @@ import { PipesModule } from './pipes/pipes.module';
     AppComponent,
     MainNavComponent,
     UsersComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,
