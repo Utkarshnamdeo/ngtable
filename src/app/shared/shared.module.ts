@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalComponent } from './modal/modal.component';
+import { UserModalComponent } from './user-modal/user-modal.component';
 
 @NgModule({
-  declarations: [ModalComponent],
-  imports: [
-    CommonModule
-  ]
+  declarations: [UserModalComponent],
+  imports: [CommonModule]
 })
-export class SharedModule { }
+export class SharedModule {}
