@@ -1,5 +1,5 @@
 <td class="each-body-item">
-  <mat-checkbox (change)="select()"></mat-checkbox>
+  <mat-checkbox (change)="select($event)"></mat-checkbox>
 </td>
 <td class="each-body-item" *ngFor="let item of (itemData | keys)">
   <span *ngIf="item !== 'dateOfBirth'">
