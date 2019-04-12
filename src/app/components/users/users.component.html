@@ -3,52 +3,51 @@
     <div class="head"></div>
     <div class="options"></div>
   </div>
-  <div class="table-constainer">
-    <table class="user-table" *ngIf="localData.length">
-      <thead class="table-head">
-        <td class="each-head-item">
-          <mat-checkbox>Select ALl</mat-checkbox>
-        </td>
-        <td class="each-head-item" *ngFor="let head of tableHeads">
-          {{ head | uppercase }}
-        </td>
-        <td class="each-head-item">ACTIONS</td>
-      </thead>
-      <tbody class="table-body">
-        <tr
-          class="table-row"
-          *ngFor="let data of localData"
-          (click)="openModal(data)"
-        >
-          <td class="each-body-item">
+  <div class="table-section">
+    <div class="table-container">
+      <table class="user-table" *ngIf="localData.length">
+        <tr class="table-head">
+          <td class="each-head-item">
             <mat-checkbox></mat-checkbox>
           </td>
-          <td class="each-body-item" *ngFor="let item of (data | keys)">
-            <span *ngIf="item !== 'dateOfBirth'">
-              {{ data[item] }}
-            </span>
-            <span *ngIf="item === 'dateOfBirth'">
-              {{ data[item] | date }}
+          <td class="each-head-item" *ngFor="let head of tableHeads">
+            <span>
+              {{ head | uppercase }}
             </span>
           </td>
-          <td class="each-body-item">
-            <div class="edit">
-              <button mat-icon-button (click)="navigateToDetail(data)">
-                <i class="material-icons">
-                  edit
-                </i>
-              </button>
-            </div>
-            <div class="remove">
-              <button mat-icon-button>
-                <i class="material-icons">
-                  delete
-                </i>
-              </button>
-            </div>
+          <td class="each-head-item">
+            <span>
+              ACTIONS
+            </span>
           </td>
         </tr>
-      </tbody>
-    </table>
+        <tr
+          class="table-row"
+          *ngFor="let data of displayData"
+          (click)="openModal(data)"
+          app-user-item
+          [itemData]="data"
+          [columnWidth]="columnWidth"
+          (userEvent)="userEventHandler($event)"
+        ></tr>
+      </table>
+    </div>
+    <div class="pagination-container">
+      <div class="pagination-buttons">
+        <div class="each-button" *ngFor="let key of (paginationButtons | keys)">
+          <button
+            disabled="{{ paginationButtons[key].disabled }}"
+            mat-raised-button
+            (click)="paginate(paginationButtons[key].value)"
+          >
+            {{ paginationButtons[key].title }}
+          </button>
+        </div>
+      </div>
+      <div class="pagination-info">
+        <div class="page-number">Current Page: {{ currentPage }}</div>
+        <div class="total-pages">Total Pages: {{ totalPages }}</div>
+      </div>
+    </div>
   </div>
 </div>

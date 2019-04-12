@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { User } from '../../../interfaces';
+import { AppService } from '../../../app.service';
 @Component({
-  selector: 'app-user-item',
+  selector: 'tr[app-user-item]',
   templateUrl: './user-item.component.html',
   styleUrls: ['./user-item.component.scss']
 })
 export class UserItemComponent implements OnInit {
+  @Input() itemData: Array<User>;
+  @Input() columnWidth: number;
+  @Output() userEvent: EventEmitter<any> = new EventEmitter<any>();
+  constructor(private router: Router, service: AppService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  public navigateToDetail(data: User) {
+    this.router.navigate(['/users', data.id]);
   }
 
+  public delete(event, data: User) {
+    event.stopPropagation();
+    this.userEvent.emit({ type: 'REMOVE_USER', payload: data });
+  }
+
+  select(e) {
+    e.stopPropagation();
+  }
 }

@@ -13,6 +13,8 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
 import { UserItemComponent } from './components/users/user-item/user-item.component';
 import { AppService } from './app.service';
 import { PipesModule } from './pipes/pipes.module';
+import { SharedModule } from './shared/shared.module';
+import { UserModalComponent } from './shared/user-modal/user-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +31,10 @@ import { PipesModule } from './pipes/pipes.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    PipesModule
+    PipesModule,
+    SharedModule
   ],
+  entryComponents: [UserModalComponent],
   exports: [PipesModule],
   providers: [AppService],
   bootstrap: [AppComponent]
