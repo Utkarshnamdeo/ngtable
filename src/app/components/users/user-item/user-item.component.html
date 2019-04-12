@@ -1,3 +1,29 @@
-<p>
-  user-item works!
-</p>
+<td class="each-body-item">
+  <mat-checkbox (change)="select()"></mat-checkbox>
+</td>
+<td class="each-body-item" *ngFor="let item of (itemData | keys)">
+  <span *ngIf="item !== 'dateOfBirth'">
+    {{ itemData[item] }}
+  </span>
+  <span *ngIf="item === 'dateOfBirth'">
+    {{ itemData[item] | date }}
+  </span>
+</td>
+<td class="each-body-item">
+  <div class="options">
+    <div class="edit">
+      <button mat-icon-button (click)="navigateToDetail(itemData)">
+        <i class="material-icons">
+          edit
+        </i>
+      </button>
+    </div>
+    <div class="remove">
+      <button mat-icon-button (click)="delete($event, itemData)">
+        <i class="material-icons">
+          delete
+        </i>
+      </button>
+    </div>
+  </div>
+</td>

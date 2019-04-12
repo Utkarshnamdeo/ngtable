@@ -13,6 +13,34 @@ import { UserModalComponent } from '../../shared/user-modal/user-modal.component
 export class UsersComponent implements OnInit {
   public localData: Array<User> = [];
   public tableHeads = [];
+  public columnWidth: any;
+
+  public displayData: Array<User> = [];
+  public currentPage = 0;
+  private lastPage = 0;
+  public totalPages = 0;
+  public paginationButtons = {
+    first: {
+      title: 'First',
+      value: 0,
+      disabled: false
+    },
+    prev: {
+      title: 'Previous',
+      value: 0,
+      disabled: false
+    },
+    next: {
+      title: 'next',
+      value: 0,
+      disabled: false
+    },
+    last: {
+      title: 'last',
+      value: 0,
+      disabled: false
+    }
+  };
 
   constructor(
     private service: AppService,
@@ -20,23 +48,76 @@ export class UsersComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
+  ngOnInit() {
+    this.localData = this.service.getInitialData();
+    this.calculateDisplayData();
+    this.tableHeads = Object.keys(this.localData[0]);
+    this.columnWidth = 100 / this.tableHeads.length;
+  }
+
   public navigateToDetail(data: User) {
     this.router.navigate(['/users', data.id]);
   }
 
   public openModal(data) {
-    const dialogRef = this.dialog.open(UserModalComponent, {
-      width: '300px',
-      data
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
+    this.dialog.open(UserModalComponent, { data });
   }
 
-  ngOnInit() {
-    this.localData = this.service.getInitialData();
-    this.tableHeads = Object.keys(this.localData[0]);
+  private calculateDisplayData(selected?) {
+    const page = this.calculatePagination(selected);
+    this.displayData = [...this.localData.slice(page * 10, (page + 1) * 10)];
+  }
+
+  private calculatePagination(selected?) {
+    this.lastPage = Math.round(this.localData.length / 10) - 1;
+    this.totalPages = this.lastPage;
+    this.currentPage =
+      selected !== undefined
+        ? selected
+        : this.currentPage > this.lastPage
+        ? this.lastPage
+        : this.currentPage;
+    this.paginationButtons.next.value =
+      this.lastPage === this.currentPage
+        ? this.currentPage
+        : this.currentPage + 1;
+    this.paginationButtons.prev.value =
+      this.paginationButtons.first.value === this.currentPage
+        ? this.currentPage
+        : this.currentPage - 1;
+    this.paginationButtons.last.value = this.lastPage;
+
+    if (this.currentPage === this.paginationButtons.first.value) {
+      this.paginationButtons.first.disabled = true;
+      this.paginationButtons.prev.disabled = true;
+    } else {
+      this.paginationButtons.first.disabled = false;
+      this.paginationButtons.prev.disabled = false;
+    }
+
+    if (this.currentPage === this.lastPage) {
+      this.paginationButtons.last.disabled = true;
+      this.paginationButtons.next.disabled = true;
+    } else {
+      this.paginationButtons.last.disabled = false;
+      this.paginationButtons.next.disabled = false;
+    }
+
+    return this.currentPage;
+  }
+
+  public paginate(value) {
+    this.calculateDisplayData(value);
+  }
+
+  public selectAll(e) {
+    e.stopPropagation();
+  }
+
+  public userEventHandler(event) {
+    console.log(event);
+    this.localData = [...this.service.userReducer(event)];
+    this.calculateDisplayData();
+    console.log(this.localData);
   }
 }

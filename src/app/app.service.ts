@@ -40,10 +40,10 @@ export class AppService {
         return this.data;
       }
       case this.actions.removeUser: {
-        return [
-          ...this.data.slice(0, action.payload.index),
-          ...this.data.slice(action.payload.index + 1)
-        ];
+        const index = this.data.indexOf(action.payload);
+        this.data.splice(index, 1);
+        return this.data;
+        // return [...this.data.slice(0, index), ...this.data.slice(index + 1)];
       }
       default: {
         return this.data;

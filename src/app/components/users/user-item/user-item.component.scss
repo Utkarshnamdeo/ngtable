@@ -1,0 +1,12 @@
+.each-body-item {
+  padding: 0px 10px;
+  color: #fff;
+  span {
+    float: right;
+  }
+
+  .options {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
