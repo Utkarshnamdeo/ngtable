@@ -16,11 +16,11 @@ export class UserItemComponent implements OnInit {
 
   ngOnInit() {}
 
-  public navigateToDetail(data: User) {
+  public navigateToDetail(data) {
     this.router.navigate(['/users', data.id]);
   }
 
-  public delete(event, data: User) {
+  public delete(event, data) {
     event.stopPropagation();
     this.userEvent.emit({ type: 'REMOVE_USER', payload: data });
   }
