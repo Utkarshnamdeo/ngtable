@@ -1,6 +1,93 @@
-<p>
-  user-detail works!
-  {{ num }}
-</p>
-<button mat-raised-button (click)="updateNum()">Update with 8</button>
-<button mat-raised-button (click)="navigate()">Go to list</button>
+<div class="user-detail-container">
+  <div class="user-inner-container">
+    <div class="head">
+      User Details
+    </div>
+    <div class="content">
+      <div class="name">
+        <div class="label">Name:</div>
+        <form>
+          <div class="first">
+            <div class="input" *ngIf="showFirstInput">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ displayData.firstName }}</mat-label>
+                <input
+                  matInput
+                  autofocus
+                  [focus]="true"
+                  name="firstname"
+                  [formControl]="firstNameFormControl"
+                  [(ngModel)]="displayData.firstName"
+                />
+                <mat-error *ngIf="firstNameFormControl.invalid"
+                  >This field can't be empty</mat-error
+                >
+              </mat-form-field>
+              <button
+                mat-icon-button
+                (click)="showFirstInput = !showFirstInput"
+              >
+                <i class="material-icons">done</i>
+              </button>
+            </div>
+            <span
+              *ngIf="!showFirstInput"
+              (click)="showFirstInput = !showFirstInput"
+            >
+              {{ displayData.firstName }}</span
+            >
+          </div>
+          <div class="last">
+            <div class="input" *ngIf="showLastInput">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ displayData.lastName }}</mat-label>
+                <input
+                  matInput
+                  autofocus
+                  [focus]="true"
+                  name="lastname"
+                  [formControl]="lastNameFormControl"
+                  [(ngModel)]="displayData.lastName"
+                />
+                <mat-error *ngIf="lastNameFormControl.invalid"
+                  >This field can't be empty</mat-error
+                >
+              </mat-form-field>
+              <button mat-icon-button (click)="showLastInput = !showLastInput">
+                <i class="material-icons">done</i>
+              </button>
+            </div>
+            <span
+              *ngIf="!showLastInput"
+              (click)="showLastInput = !showLastInput"
+              >{{ displayData.lastName }}</span
+            >
+          </div>
+        </form>
+      </div>
+      <div class="age">
+        <span>{{ displayData.age }} old.</span>
+      </div>
+      <div class="email">
+        <span>Email: {{ displayData.email }}</span>
+      </div>
+      <div class="country">
+        <span>Country: {{ displayData.country }}</span>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="cancel">
+        <button mat-raised-button (click)="navigate()">
+          <i class="material-icons">
+            arrow_back_ios
+          </i>
+        </button>
+      </div>
+      <div class="save">
+        <button mat-raised-button (click)="saveData()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

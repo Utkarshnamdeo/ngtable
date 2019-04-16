@@ -5,4 +5,5 @@ export interface User {
   email: string;
   country: string;
   dateOfBirth: string;
+  selected?: boolean;
 }

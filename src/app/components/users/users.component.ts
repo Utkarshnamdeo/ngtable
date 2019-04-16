@@ -5,16 +5,20 @@ import { MatDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { User } from '../../interfaces';
 import { UserModalComponent } from '../../shared/user-modal/user-modal.component';
+import { UsersService } from './users.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
+  providers: [UsersService]
 })
 export class UsersComponent implements OnInit {
   public localData: Array<User> = [];
   public tableHeads = [];
-  public columnWidth: any;
-
+  public showExport = false;
+  public selectedItems: Array<User> = [];
+  public isSelected = false;
+  /* pagination options and  */
   public displayData: Array<User> = [];
   public currentPage = 0;
   private lastPage = 0;
@@ -42,24 +46,43 @@ export class UsersComponent implements OnInit {
     }
   };
 
+  /* export options */
+  private exportOptions = {
+    fieldSeparator: ';',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: false,
+    headers: [],
+    showTitle: true,
+    title: 'asfasf',
+    useBom: false,
+    removeNewLines: true,
+    keys: []
+  };
+
+  public fileName = '';
+
   constructor(
-    private service: AppService,
+    private appService: AppService,
+    private userService: UsersService,
     private router: Router,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.localData = this.service.getInitialData();
+    this.localData = this.appService.getInitialData();
     this.calculateDisplayData();
     this.tableHeads = Object.keys(this.localData[0]);
-    this.columnWidth = 100 / this.tableHeads.length;
+    this.exportOptions.keys = [...this.tableHeads];
   }
 
   public navigateToDetail(data: User) {
     this.router.navigate(['/users', data.id]);
   }
 
-  public openModal(data) {
+  public openModal(e, data) {
+    e.stopPropagation();
+    // e.preventDefault();
     this.dialog.open(UserModalComponent, { data });
   }
 
@@ -111,13 +134,43 @@ export class UsersComponent implements OnInit {
   }
 
   public selectAll(e) {
-    e.stopPropagation();
+    this.selectedItems = [];
+    this.localData = [
+      ...this.appService.userReducer({
+        type: 'UPDATE_MANY',
+        payload: e.checked
+      })
+    ];
+    this.updateData();
   }
 
+  public deleteSelected(e) {
+    e.stopPropagation();
+    this.localData = [
+      ...this.appService.userReducer({
+        type: 'REMOVE_MANY',
+        payload: this.selectedItems
+      })
+    ];
+    this.isSelected = false;
+    this.updateData();
+  }
+
+  updateData() {
+    this.selectedItems = this.localData.filter(item => item.selected === true);
+    return this.calculateDisplayData();
+  }
+
+  /* handle event from the user-item component  */
   public userEventHandler(event) {
-    console.log(event);
-    this.localData = [...this.service.userReducer(event)];
-    this.calculateDisplayData();
-    console.log(this.localData);
+    this.localData = [...this.appService.userReducer(event)];
+    this.updateData();
+  }
+
+  public export(e) {
+    e.stopPropagation();
+    this.userService.export(this.selectedItems, this.tableHeads, this.fileName);
+    this.fileName = '';
+    this.showExport = false;
   }
 }

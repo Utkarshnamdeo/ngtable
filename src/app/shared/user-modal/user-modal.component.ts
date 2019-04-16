@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import * as moment from 'moment';
 
+import { AppService } from '../../app.service';
 import { User } from '../../interfaces';
 @Component({
   selector: 'app-user-modal',
@@ -12,17 +12,11 @@ export class UserModalComponent implements OnInit {
   public age: any;
   constructor(
     public dialogRef: MatDialogRef<UserModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: User
+    @Inject(MAT_DIALOG_DATA) public data: User,
+    private service: AppService
   ) {}
 
   ngOnInit() {
-    let dob = moment(new Date(this.data.dateOfBirth));
-    let now = moment(new Date());
-    this.age = dob
-      .from(now)
-      .split(' ')
-      .slice(0, 2)
-      .join()
-      .replace(',', ' ');
+    this.age = this.service.calculateAge(this.data.dateOfBirth);
   }
 }
