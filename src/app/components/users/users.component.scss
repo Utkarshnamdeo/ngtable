@@ -1,0 +1,100 @@
+.user-main-container {
+  width: 90%;
+  margin: auto;
+  .user-inner-container {
+    .options {
+      .option-buttons {
+        display: flex;
+        .delete {
+          padding: 10px 10px 10px 0;
+          button {
+            background: #6c7ae0;
+          }
+        }
+        .export {
+          padding: 10px 0 10px 0;
+          .show-input {
+            button {
+              background: #6c7ae0;
+            }
+          }
+          .download {
+            display: flex;
+            button {
+              background: #6c7ae0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .table-section {
+    box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 1);
+    border-radius: 10px;
+    overflow: hidden;
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      .user-table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 100%;
+        height: 100px !important;
+        .table-head {
+          background: #6c7ae0;
+          overflow: hidden;
+          .each-head-item {
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 10px 10px;
+            color: #fff;
+            span {
+              float: right;
+            }
+          }
+        }
+        .table-row {
+          &:hover {
+            cursor: pointer;
+            background: #e4e4e42e;
+          }
+        }
+      }
+    }
+    .pagination-container {
+      background: #0b0b0c !important;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .pagination-buttons {
+        display: flex;
+        .each-button {
+          padding: 10px 0 10px 10px;
+        }
+      }
+      .pagination-info {
+        display: flex;
+        padding-right: 20px;
+        .page-number {
+          align-self: center;
+          padding: 10px;
+        }
+        .total-pages {
+          align-self: center;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}
+
+.selected {
+  background: #6c7ae0;
+}
+
+input {
+  padding: 0px 10px !important;
+  margin: 0px 10px 0 0 !important;
+}

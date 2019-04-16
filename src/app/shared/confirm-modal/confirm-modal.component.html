@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{ data.alert }}</h1>
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+</div>
+<div mat-dialog-actions *ngIf="data.showButtons">
+  <button mat-button (click)="cancel()">No Thanks</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</div>

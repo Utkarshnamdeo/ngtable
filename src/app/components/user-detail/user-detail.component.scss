@@ -1,0 +1,80 @@
+.user-detail-container {
+  width: 90%;
+  padding-top: 56px;
+  margin: auto;
+
+  .user-inner-container {
+    box-shadow: 0 0px 40px 0px black;
+    border-radius: 10px;
+    overflow: hidden;
+    .head {
+      background: #6c7ae0;
+      padding: 10px;
+      font-size: 1.1rem;
+      letter-spacing: 0.1rem;
+      font-weight: bold;
+    }
+    .content {
+      padding: 10px;
+      .name {
+        display: flex;
+        .label {
+          font-size: 1.2rem;
+          letter-spacing: 0.04rem;
+        }
+        form {
+          display: flex;
+          .first {
+            padding-left: 10px;
+            .input {
+            }
+            span {
+              font-size: 1.2rem;
+              letter-spacing: 0.04rem;
+              text-transform: capitalize;
+            }
+          }
+          .last {
+            padding-left: 10px;
+            .input {
+            }
+            span {
+              font-size: 1.2rem;
+              letter-spacing: 0.04rem;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+      .age {
+        span {
+          font-size: 1.2rem;
+          letter-spacing: 0.04rem;
+        }
+      }
+      .email {
+        span {
+          font-size: 1.2rem;
+          letter-spacing: 0.04rem;
+        }
+      }
+      .country {
+        span {
+          font-size: 1.2rem;
+          letter-spacing: 0.04rem;
+        }
+      }
+    }
+    .actions {
+      background: #0b0b0c !important;
+      display: flex;
+      justify-content: space-between;
+      .cancel {
+        padding: 10px;
+      }
+      .save {
+        padding: 10px;
+      }
+    }
+  }
+}

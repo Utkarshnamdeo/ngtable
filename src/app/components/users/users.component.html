@@ -1,0 +1,100 @@
+<div class="user-main-container">
+  <div class="user-inner-container">
+    <div class="options">
+      <div class="option-buttons">
+        <div class="delete">
+          <button
+            disabled="{{ !selectedItems.length }}"
+            mat-raised-button
+            (click)="deleteSelected($event)"
+          >
+            Delete
+            <i class="material-icons">
+              delete
+            </i>
+          </button>
+        </div>
+        <div class="export">
+          <div class="show-input">
+            <button
+              disabled="{{ !selectedItems.length }}"
+              mat-raised-button
+              *ngIf="!showExport"
+              (click)="showExport = !showExport"
+            >
+              Export
+            </button>
+          </div>
+          <div class="download" *ngIf="showExport">
+            <input placeholder="Enter file name" [(ngModel)]="fileName" />
+            <button
+              disabled="{{ !fileName }}"
+              mat-button
+              (click)="export($event)"
+            >
+              <i class="material-icons">
+                cloud_download
+              </i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="head"></div>
+  </div>
+  <div class="table-section">
+    <div class="table-container">
+      <table class="user-table" *ngIf="localData.length">
+        <tr class="table-head">
+          <td class="each-head-item">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="selectAll($event)"
+              [checked]="isSelected"
+            ></mat-checkbox>
+          </td>
+          <td class="each-head-item" *ngFor="let head of tableHeads">
+            <span>
+              {{ head | uppercase }}
+            </span>
+          </td>
+          <td class="each-head-item">
+            <span>
+              ACTIONS
+            </span>
+          </td>
+        </tr>
+        <tr
+          class="table-row"
+          *ngFor="let data of displayData"
+          (click)="openModal($event, data)"
+          app-user-item
+          [itemData]="data"
+          (userEvent)="userEventHandler($event)"
+        ></tr>
+      </table>
+    </div>
+    <div class="pagination-container">
+      <div class="pagination-buttons">
+        <div class="each-button" *ngFor="let key of (paginationButtons | keys)">
+          <button
+            disabled="{{ paginationButtons[key].disabled }}"
+            mat-raised-button
+            (click)="paginate(paginationButtons[key].value)"
+          >
+            {{ paginationButtons[key].title }}
+          </button>
+        </div>
+      </div>
+      <div class="pagination-info">
+        <div *ngIf="selectedItems.length" class="page-number">
+          {{ selectedItems.length }}
+          <span *ngIf="selectedItems.length < 2">Item</span>
+          <span *ngIf="selectedItems.length >= 2">Items</span> selected
+        </div>
+        <div class="page-number">Current Page: {{ currentPage }}</div>
+        <div class="total-pages">Total Pages: {{ totalPages }}</div>
+      </div>
+    </div>
+  </div>
+</div>

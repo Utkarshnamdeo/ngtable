@@ -1,0 +1,34 @@
+<td class="each-body-item">
+  <mat-checkbox
+    [checked]="itemData.selected"
+    [indeterminate]="false"
+    (change)="select($event)"
+    (click)="$event.stopPropagation()"
+  ></mat-checkbox>
+</td>
+<td class="each-body-item" *ngFor="let item of (displayData | keys)">
+  <span *ngIf="item !== 'dateOfBirth'">
+    {{ displayData[item] }}
+  </span>
+  <span *ngIf="item === 'dateOfBirth'">
+    {{ displayData[item] | date }}
+  </span>
+</td>
+<td class="each-body-item">
+  <div class="options">
+    <div class="edit">
+      <button mat-icon-button (click)="navigateToDetail()">
+        <i class="material-icons">
+          edit
+        </i>
+      </button>
+    </div>
+    <div class="remove">
+      <button mat-icon-button (click)="delete($event)">
+        <i class="material-icons">
+          delete
+        </i>
+      </button>
+    </div>
+  </div>
+</td>
