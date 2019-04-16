@@ -73,6 +73,9 @@ export class UsersComponent implements OnInit {
     this.localData = this.appService.getInitialData();
     this.calculateDisplayData();
     this.tableHeads = Object.keys(this.localData[0]);
+    if (this.tableHeads.includes('selected')) {
+      this.tableHeads.splice(this.tableHeads.indexOf('selected'), 1);
+    }
     this.exportOptions.keys = [...this.tableHeads];
   }
 

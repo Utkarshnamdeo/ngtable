@@ -54,6 +54,7 @@ export class UserDetailComponent implements OnInit, OnChanges {
       this.displayData.lastName !== this.data.lastName
     ) {
       const dialogRef = this.dialog.open(ConfirmModalComponent, {
+        width: '300px',
         data: {
           alert: 'Please confirm',
           message: `It seems like you have unsaved field.
@@ -78,7 +79,7 @@ export class UserDetailComponent implements OnInit, OnChanges {
   public saveData() {
     this.data.firstName = this.displayData.firstName;
     this.data.lastName = this.displayData.lastName;
-    this.service.userReducer({ type: 'UPDATE', payload: this.displayData });
+    this.service.userReducer({ type: 'UPDATE', payload: this.data });
     this.showFirstInput = false;
     this.showLastInput = false;
   }
