@@ -7,14 +7,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { PipesModule } from './pipes/pipes.module';
+import { DirectivesModule } from './directives/directives.module';
+import { SharedModule } from './shared/shared.module';
+
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { UserItemComponent } from './components/users/user-item/user-item.component';
 import { AppService } from './app.service';
-import { PipesModule } from './pipes/pipes.module';
-import { SharedModule } from './shared/shared.module';
 import { UserModalComponent } from './shared/user-modal/user-modal.component';
+import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,10 +35,11 @@ import { UserModalComponent } from './shared/user-modal/user-modal.component';
     ReactiveFormsModule,
     HttpClientModule,
     PipesModule,
-    SharedModule
+    SharedModule,
+    DirectivesModule
   ],
-  entryComponents: [UserModalComponent],
-  exports: [PipesModule],
+  entryComponents: [UserModalComponent, ConfirmModalComponent],
+  exports: [PipesModule, DirectivesModule],
   providers: [AppService],
   bootstrap: [AppComponent]
 })
