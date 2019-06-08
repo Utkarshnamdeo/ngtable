@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AppService } from '../../app.service';
 import { ConfirmModalComponent } from '../../shared/confirm-modal/confirm-modal.component';
